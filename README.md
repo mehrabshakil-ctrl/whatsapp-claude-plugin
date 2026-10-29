@@ -1,5 +1,7 @@
 # WhatsApp Channel for Claude Code
 
+This fork includes a [Windows Codex bridge with WhatsApp reaction approvals](./docs/codex-windows.md).
+
 Drive your Claude Code session from WhatsApp. Choose a **linked device** for a
 personal account or the **official WhatsApp Cloud API** for business DMs.
 

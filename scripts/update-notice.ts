@@ -57,6 +57,13 @@ if (!isStaticMode()) {
   // latest.
   const CHANGELOG: { version: string; notes: string[] }[] = [
     {
+      version: "0.34.0",
+      notes: [
+        "Fork: Windows Codex bridge relays command and file approvals through WhatsApp reactions.",
+        "Fork: exact reply message IDs keep messages received during a task outstanding.",
+      ],
+    },
+    {
       version: "0.33.1",
       notes: [
         "Watchdog sign-in alerts now separate the Terminal command from Claude Code's /login step.",

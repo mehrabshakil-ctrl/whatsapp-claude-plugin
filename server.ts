@@ -65,6 +65,7 @@ import {
   normalizeMentionJids,
 } from "./lib/mentions";
 import { caseSafeKeys } from "./lib/auth-keys";
+import { coveredReplyIds } from "./lib/reply-snapshot";
 import { cronMatches, parseCronSection } from "./lib/cron";
 import { extractMentions, extractText } from "./lib/inbound-message";
 import { parseMaxStore } from "./lib/max-store";
@@ -3424,6 +3425,11 @@ mcp.setRequestHandler(ListToolsRequestSchema, async () =>
               properties: {
                 chat_id: { type: "string" },
                 text: { type: "string" },
+                mark_replied_ids: {
+                  type: "array",
+                  items: { type: "string" },
+                  description: "Optional exact inbound IDs covered by this reply. Empty keeps all messages outstanding; omitted preserves the normal chat snapshot.",
+                },
                 reply_to: {
                   type: "string",
                   description:
@@ -3826,11 +3832,10 @@ const handleToolCall = async (
         // see markReplied. Anything that lands in this chat from here on is
         // NOT covered by this reply and must stay unreplied.
         const typingMark = typing.generation();
-        const repliedIds = new Set(
-          getUnreplied()
-            .filter((m) => m.chat_id === chat_id)
-            .map((m) => m.id),
-        );
+        const explicitReplyIds = args.mark_replied_ids === undefined
+          ? undefined
+          : z.array(z.string()).parse(args.mark_replied_ids);
+        const repliedIds = coveredReplyIds(getUnreplied(), chat_id, explicitReplyIds);
 
         let mentionJids = normalizeMentionJids(
           rawMentions.filter((m) => !isAllToken(m)),

@@ -1,8 +1,8 @@
 {
   "name": "whatsapp-channel",
   "displayName": "WhatsApp Channel for Claude Code",
-  "description": "WhatsApp channel for Claude Code \u2014 choose linked-device messaging or official Cloud API, with built-in access control.",
-  "version": "0.33.1",
+  "description": "WhatsApp channel for Claude Code — choose linked-device messaging or official Cloud API, with built-in access control.",
+  "version": "0.34.0",
   "author": {
     "name": "Rich627"
   },
@@ -10,7 +10,12 @@
   "repository": "https://github.com/Rich627/whatsapp-claude-plugin",
   "license": "Apache-2.0",
   "icon": "./assets/icon.svg",
-  "keywords": ["whatsapp", "messaging", "channel", "mcp"],
+  "keywords": [
+    "whatsapp",
+    "messaging",
+    "channel",
+    "mcp"
+  ],
   "userConfig": {
     "transcription_provider": {
       "type": "string",
